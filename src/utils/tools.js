@@ -1,0 +1,1 @@
+exports.extend = Object.assign;

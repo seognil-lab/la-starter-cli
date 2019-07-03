@@ -31,5 +31,7 @@ module.exports = {
   rules: {
     'no-console': ['warn'],
     'no-unused-vars': ['warn'],
+    'import/no-dynamic-require': ['warn'],
+    'no-param-reassign': ['warn'],
   },
 };
