@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const nodegit = require('nodegit');
+const gitconfig = require('gitconfig');
 const npmConf = require('npm-conf');
 
 const { ck } = require('../../../utils/log');
@@ -8,7 +8,7 @@ const { extend } = require('../../../utils/tools');
 // * ----------------------------------------------------------------
 
 const getGitName = () =>
-  nodegit.Config.openDefault().then(config => config.getStringBuf('user.name'));
+  gitconfig.get({ location: 'global' }).then(config => config.user && config.user.name);
 
 // * ----------------------------------------------------------------
 
