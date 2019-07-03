@@ -2,9 +2,12 @@ const path = require('path');
 
 const chalk = require('chalk');
 const { default: Printer } = require('@darkobits/lolcatjs');
-const { path: appRoot } = require('app-root-path');
 
-const { version: localVer } = require(path.resolve(appRoot, './package.json'));
+// * app-root-path,their bug
+// const { path: appRoot } = require('app-root-path');
+// const { version: localVer } = require(path.resolve(appRoot, './package.json'));
+
+const { version: localVer } = require('../../package.json');
 
 // * ----------------------------------------------------------------
 
