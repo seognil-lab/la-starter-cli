@@ -10,7 +10,8 @@
   },
   "scripts": {
     "format": "eslint --fix . && prettier --write '{,!(node_modules|dist)/**/}*.*'",
-    "format:staged": "lint-staged && pretty-quick --staged"
+    "format:staged": "lint-staged && pretty-quick --staged",
+    "release": "git push --follow-tags origin master && npm publish"
   },
   "lint-staged": {
     "*.js": "eslint --fix"
