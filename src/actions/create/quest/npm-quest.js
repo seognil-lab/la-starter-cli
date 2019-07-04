@@ -7,15 +7,15 @@ const { extend } = require('../../../utils/tools');
 
 // * ----------------------------------------------------------------
 
-const getGitName = () =>
-  gitconfig.get({ location: 'global' }).then(config => config.user && config.user.name);
+const getGitName = hasGit =>
+  hasGit && gitconfig.get({ location: 'global' }).then(config => config.user && config.user.name);
 
 // * ----------------------------------------------------------------
 
-exports.genNpmConfig = async projName => {
+exports.genNpmConfig = async (projName, hasGit) => {
   const conf = npmConf();
 
-  const author = conf.get('init-author-name') || (await getGitName()) || 'your-name';
+  const author = conf.get('init-author-name') || (await getGitName(hasGit)) || 'your-name';
 
   const npmConfig = {
     name: projName,

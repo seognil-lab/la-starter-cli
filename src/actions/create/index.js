@@ -1,15 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const { sync: commandExistsSync } = require('command-exists');
+const commandExists = require('command-exists');
 const trash = require('trash');
 const program = require('commander');
 const shell = require('shelljs');
-
-// * ---------------- const
-
-const useYarn = commandExistsSync('yarn');
-const xxpm = useYarn ? 'yarn' : 'npm';
 
 // * -------------------------------- src
 
@@ -59,7 +54,14 @@ const create = async (...params) => {
 
   const colorFullDest = ck.cyan(fullDest);
 
-  // * ---------------- helper fn
+  // * ---------------- helper fn & const
+
+  const [useYarn, hasGit] = await Promise.all([
+    commandExists('yarn').catch(e => null),
+    commandExists('git').catch(e => null),
+  ]);
+
+  const xxpm = useYarn ? 'yarn' : 'npm';
 
   const destExec = (cmd, stdio) => execWrapper(cmd, stdio, fullDest);
 
@@ -94,7 +96,7 @@ const create = async (...params) => {
 
   const [basicAnswers, npmConfig] = await Promise.all([
     theBasicQuest(xxpm),
-    genNpmConfig(projName),
+    genNpmConfig(projName, hasGit),
     shouldDelete && trash(fullDest),
   ]);
 
@@ -156,7 +158,7 @@ const create = async (...params) => {
 
   // * ---------------- git
 
-  if (shouldGitInit) {
+  if (hasGit && shouldGitInit) {
     log('', `🗃  Initializing git repository...`);
     await destExec(`git init`);
     await destExec(`git add --all`);
@@ -181,7 +183,7 @@ const create = async (...params) => {
       ? [`start`, `build`, `format`, `analyze ${ck.grey(`(after build)`)}`]
       : [`test:watch`, `build`, `format`]
     )
-      .map(c => `${xxpm} ${c}`)
+      .map(c => (useYarn ? `yarn ${c}` : `npm run ${c}`))
       .map(ck.cmd);
 
     log(cmdHelp);
