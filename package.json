@@ -1,6 +1,6 @@
 {
   "name": "@seognil-lab/la-starter-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "My Javascript development cli",
   "repository": "https://github.com/seognil-lab/la-starter-cli",
   "author": "Seognil LC",
