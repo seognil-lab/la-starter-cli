@@ -66,3 +66,5 @@ About my starters
 - [ ] `license` command
 - [ ] `readme` command
 - [ ] Better readme template for JS project
+- [ ] Only merge config files
+- [ ] merge like git merge?
