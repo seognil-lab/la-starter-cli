@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/seognil-lab/la-starter-cli/compare/v0.1.4...v0.1.5) (2019-07-11)
+
+
+### Bug Fixes
+
+* **logic:** some process step issues ([72e38fb](https://github.com/seognil-lab/la-starter-cli/commit/72e38fb))
+
+
+
 ### [0.1.4](https://github.com/seognil-lab/la-starter-cli/compare/v0.1.3...v0.1.4) (2019-07-04)
 
 
