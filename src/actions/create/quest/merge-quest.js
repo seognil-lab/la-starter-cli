@@ -7,7 +7,7 @@ const { ck } = require('../../../utils/log');
 exports.theMergeQuest = async () => {
   const choices = [
     ['Overwrite', '(move original to trash bin)'],
-    ['Merge', '(keep original and replace)'],
+    // ['Merge', '(keep original and replace)'],
     ['Abort'],
   ].map(([name, after]) => ({
     value: name,

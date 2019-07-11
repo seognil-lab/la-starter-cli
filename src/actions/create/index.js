@@ -77,13 +77,15 @@ const create = async (...params) => {
 
   // * ---------------- merge quest
 
-  const shouldGitInit = false;
+  let shouldGitInit = true;
   let shouldDelete = false;
 
   if (fs.existsSync(fullDest)) {
     const mergeAction = await theMergeQuest(fullDest);
 
     if (mergeAction === 'Cancel') process.exit();
+
+    if (mergeAction === 'Merge') shouldGitInit = false;
 
     if (mergeAction === 'Overwrite') {
       shouldDelete = true;
@@ -148,14 +150,6 @@ const create = async (...params) => {
     ]);
   });
 
-  // * ---------------- npm install
-
-  {
-    log();
-    const cmd = useYarn ? 'yarn' : 'npm install --loglevel error';
-    await destExec(cmd, true);
-  }
-
   // * ---------------- git
 
   if (hasGit && shouldGitInit) {
@@ -163,6 +157,14 @@ const create = async (...params) => {
     await destExec(`git init`);
     await destExec(`git add --all`);
     await destExec([`git`, `commit`, `-m`, `feat(init): init project from boilerplate`]);
+  }
+
+  // * ---------------- npm install
+
+  {
+    log();
+    const cmd = useYarn ? 'yarn' : 'npm install --loglevel error';
+    await destExec(cmd, true);
   }
 
   // * -------------------------------- log scripts
